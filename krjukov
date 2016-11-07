@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII" standalone="no"?>
+<!DOCTYPE family-tree PUBLIC >
+<family-tree>
+  <person gender="male" id="45">
+    <first-name>O&#316;egs</first-name>
+    <middle-name>Asijs</middle-name>
+    <last-name>Krjukovs</last-name>
+    <dob>
+      <date>
+        <month>2</month>
+        <day>1</day>
+        <year>1976</year>
+      </date>
+    </dob>
+    <father-id>47</father-id>
+    <mother-id>46</mother-id>
+  </person>
+  <person gender="female" id="46">
+    <first-name>Irina</first-name>
+    <middle-name>Fjodors</middle-name>
+    <last-name>Makina</last-name>
+  </person>
+  <person gender="male" id="47">
+    <first-name>Asijs</first-name>
+    <middle-name>Nesters</middle-name>
+    <last-name>Krjukovs</last-name>
+    <dob>
+      <date>
+        <month>0</month>
+        <day>7</day>
+        <year>1948</year>
+      </date>
+    </dob>
+  </person>
+  <marriage husband-id="47" wife-id="46">
+    <date>
+      <month>11</month>
+      <day>12</day>
+      <year>1973</year>
+    </date>
+    <location>Bauska</location>
+  </marriage>
+</family-tree>

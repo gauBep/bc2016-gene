@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII" standalone="no"?>
+<!DOCTYPE family-tree PUBLIC "-//Portland State University//DTD CS410J Family Tree//EN" "http://www.cs.pdx.edu/~whitlock/dtds/familytree.dtd">
+<family-tree>
+  <person gender="male" id="45">
+    <first-name>Rom&#257;ns</first-name>
+    <middle-name/>
+    <last-name>Krjukovs</last-name>
+    <dob>
+      <date>
+        <month>11</month>
+        <day>1</day>
+        <year>1977</year>
+      </date>
+    </dob>
+  </person>
+  <person gender="female" id="46">
+    <first-name>Irina</first-name>
+    <middle-name>Fjodors</middle-name>
+    <last-name>Makina</last-name>
+  </person>
+  <person gender="male" id="47">
+    <first-name>Asijs</first-name>
+    <middle-name>Nesters</middle-name>
+    <last-name>Krjukovs</last-name>
+    <dob>
+      <date>
+        <month>0</month>
+        <day>7</day>
+        <year>1948</year>
+      </date>
+    </dob>
+  </person>
+  <marriage husband-id="47" wife-id="46">
+    <date>
+      <month>11</month>
+      <day>12</day>
+      <year>1973</year>
+    </date>
+    <location>Bauska</location>
+  </marriage>
+</family-tree>
