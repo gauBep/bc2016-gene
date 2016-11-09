@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/genj/src/core/genj/app/App.java"/>
+<listEntry value="/genealogyJ/src/core/genj/app/App.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -13,6 +13,6 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="genj.app.App"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="gedcom/royal92.ged"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="genj"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="genealogyJ"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dgenj.debug.level=FINE -Duser.language=DE -Xmx1024m -Dgenj.edit.beans.cache=false -Dcom.sun.management.jmxremote"/>
 </launchConfiguration>

@@ -51,5 +51,14 @@
 	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-mac-6.7.1.jar"/>
 	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-win-6.7.1.jar"/>
 	<classpathentry kind="lib" path="/home/student/Downloads/license.jar"/>
+	<classpathentry kind="lib" path="lib/js-engine.jar"/>
+	<classpathentry kind="lib" path="lib/js.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-6.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-linux32-6.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-linux64-6.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-mac-6.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-win-6.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/license.jar"/>
 	<classpathentry kind="output" path="build/eclipse/lostnfound"/>
 </classpath>
