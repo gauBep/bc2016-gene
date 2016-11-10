@@ -106,29 +106,35 @@ public class FacebookAction extends Action2 {
 		//if (r.width > rVisible.width || r.height > rVisible.height) {
 			JLabel loginLabel = new JLabel("Login:    ");
 			loginLabel.setHorizontalAlignment(JLabel.RIGHT);
-			JTextField login = new JTextField();
+			JTextField login = new JTextField();			
 			
 			JLabel passwordLabel = new JLabel("Password:    ");
 			passwordLabel.setHorizontalAlignment(JLabel.RIGHT);
 			JPasswordField password = new JPasswordField();
 			
-			JButton sendForAcceptance = new JButton("Approve posting on my Wall");			
+			JLabel approvalDisclaimer = new JLabel("<html>Please approve GenJ application for posting on the wall</html>");
+			JLabel passwordDisclaimer = new JLabel("<html>ATTENTION: Your password and login won't be stored!</html>");
+			
+			JButton sendForAcceptance = new JButton("Approve application");			
 			JButton postToFacebook = new JButton("Post to Facebook");
 			
-			final JPanel layout = new JPanel(new GridLayout(3, 2));
+			final JPanel layout = new JPanel(new GridLayout(4, 2));
 			
 			layout.add(loginLabel);
 			layout.add(login);
 			layout.add(passwordLabel);
 			layout.add(password);
+			layout.add(approvalDisclaimer);
+			layout.add(passwordDisclaimer);
 			layout.add(sendForAcceptance);
 			layout.add(postToFacebook);
 			
 //			final Dialog dialog = DialogHelper.getClosableDialog("Post family tree to Facebook", 
 //									DialogHelper.QUESTION_MESSAGE, layout,	Action2.okCancel(), e);	
 						
-			final JFrame postFrame = createFrame("Post family tree to Facebook", 300, 100);
+			final JFrame postFrame = createFrame("Post family tree to Facebook", 350, 140);
 			postFrame.add(layout);
+			postFrame.setResizable(false);
 			
 			sendForAcceptance.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -259,7 +265,7 @@ public class FacebookAction extends Action2 {
 						"&app_id=1345837392094044&redirect_uri=https://www.facebook.com/connect/login_success.html" + 
 						"&response_type=token&perms=public_profile,publish_actions");
 		
-		browserFrame.setTitle("www.facebook.com: Approve GenJ Application to post on my Wall");
+		browserFrame.setTitle("Please approve GenJ Application to post your Wall");
 		//frame.show();
 	}
 
