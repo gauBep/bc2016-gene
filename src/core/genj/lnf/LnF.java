@@ -41,6 +41,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import joxy.*;
 
+
+
 /**
  * A Look&Feel
  */
@@ -53,7 +55,10 @@ public class LnF {
     LNF_PROPERTIES = "lnf.properties",
     LNF_DIR        = "./lnf";
 
-private static final boolean USE_JOXY = true;
+private static final boolean USE_JOXY = false;
+
+
+
 
   /** Look&Feels */
   private static LnF[] instances;
@@ -123,7 +128,7 @@ private static final boolean USE_JOXY = true;
     // add an option for using the java default (aka don't change LnF from what's setup by VM)
     result.add(new LnF("Java Default", UIManager.getLookAndFeel().getClass().getName(), "", "", null, null));
     result.add(new LnF("joxy.JoxyLookAndFeel", UIManager.getLookAndFeel().getClass().getName(), "", "", null, null));
-
+    
 //     JoxyArrowButton arrowButton = new JoxyArrowButton(0);
     
     // remember
@@ -168,12 +173,15 @@ private static final boolean USE_JOXY = true;
    */
 	private LookAndFeel getInstance() throws Exception {
 		
+				
+		
 		if (USE_JOXY) {
 			if (instance == null) {
 				instance = new JoxyLookAndFeel();
 			}
 			return instance;
 		}
+		
 		// create an instance once
 		if (instance == null)
 			instance = (LookAndFeel) cl.loadClass(type).newInstance();

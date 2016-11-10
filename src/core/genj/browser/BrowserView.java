@@ -61,7 +61,7 @@ import genj.view.ToolBar;
 import genj.view.View;
 
 /**
- * Component for showing entities of a gedcom file in a tabular way
+ * Component showing built in Java Internet browser in separate Table
  */
 public class BrowserView extends View {
   
@@ -109,13 +109,15 @@ public class BrowserView extends View {
     setLayout(new BorderLayout());
 //    add(propertyTable, BorderLayout.CENTER);
     
+    
+    // Launches Internet browser in different thread
     new Thread(new Runnable(){
 
 		@Override
 		public void run() {
 			browser = new Browser();
 			com.teamdev.jxbrowser.chromium.swing.BrowserView view = new com.teamdev.jxbrowser.chromium.swing.BrowserView(browser);
-			
+	//after thread loaded browser, graphical thread loads addressBar in Internet browser
 			SwingUtilities.invokeLater(new Runnable(){
 
 				@Override
