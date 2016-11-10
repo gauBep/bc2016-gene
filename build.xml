@@ -216,6 +216,7 @@
     <antcall target="dist.language"><param name="language" value="sv"/></antcall>
     <antcall target="dist.language"><param name="language" value="it"/></antcall>
     <antcall target="dist.language"><param name="language" value="no"/></antcall>
+  	<antcall target="dist.language"><param name="language" value="lv"/></antcall>
 
   </target>
 
@@ -260,7 +261,32 @@
        <zipfileset dir="." includes="lib/jfreechart*.jar"/>
        <zipfileset dir="." includes="lib/spin*.jar"/>
        <zipfileset dir="." includes="lib/swingx*.jar"/>
-       
+     	
+       <zipfileset dir="." includes="lib/AppleJavaExtensions*.jar"/>
+       <zipfileset dir="." includes="lib/arq-2.8.8*.jar"/>
+       <zipfileset dir="." includes="lib/commons*.jar"/>	
+       <zipfileset dir="." includes="lib/cssparser-0.9.20.jar"/>
+       <zipfileset dir="." includes="lib/htmlunit*.jar"/>
+       <zipfileset dir="." includes="lib/http*.jar"/>
+       <zipfileset dir="." includes="lib/jena-2.6.4.jar"/>
+       <zipfileset dir="." includes="lib/jetty*.jar"/>
+       <zipfileset dir="." includes="lib/jfreechart-1.0.19.jar"/>
+       <zipfileset dir="." includes="lib/joxy.jar"/>
+       <zipfileset dir="." includes="lib/js-engine.jar"/>
+       <zipfileset dir="." includes="lib/js.jar"/>
+       <zipfileset dir="." includes="lib/junit.jar"/>
+       <zipfileset dir="." includes="lib/jxbrowser*.jar"/>     		
+       <zipfileset dir="." includes="lib/license.jar"/>
+       <zipfileset dir="." includes="lib/neko-htmlunit-2.23.jar"/>
+       <zipfileset dir="." includes="lib/restfb-1.33.0.jar"/>
+       <zipfileset dir="." includes="lib/sac-1.3.jar"/>
+       <zipfileset dir="." includes="lib/serializer-2.7.2.jar"/>
+       <zipfileset dir="." includes="lib/websocket*.jar"/>
+       <zipfileset dir="." includes="lib/xalan-2.7.2.jar"/>
+       <zipfileset dir="." includes="lib/xercesImpl-2.11.0.jar"/>
+       <zipfileset dir="." includes="lib/xml-apis-1.4.01.jar"/>
+     	
+     	
        <!-- stuff for reports (classes, sources, scripts)-->
        <zipfileset dir="./build/classes" includes="report/**"/>
        
