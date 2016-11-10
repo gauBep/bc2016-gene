@@ -216,7 +216,8 @@ public class FacebookAction extends Action2 {
 		frame.setLocationRelativeTo(null);
 		frame.show();
 		frame.setAlwaysOnTop(true);
-		frame.setIconImage(IMG2.getImage());	
+		frame.setIconImage(IMG2.getImage());
+		frame.setResizable(false);
 		return frame;
 	}
 	
@@ -265,7 +266,7 @@ public class FacebookAction extends Action2 {
 						"&app_id=1345837392094044&redirect_uri=https://www.facebook.com/connect/login_success.html" + 
 						"&response_type=token&perms=public_profile,publish_actions");
 		
-		browserFrame.setTitle("Please approve GenJ Application to post your Wall");
+		browserFrame.setTitle("Please approve GenJ Application to post on your Wall");
 		//frame.show();
 	}
 

@@ -207,7 +207,7 @@ public class FacebookTokenizer {
 		StringBuilder permissions = new StringBuilder();
 		List<String> permissionList = new ArrayList<>(); 
 		
-		permissionList.add("public_profile");
+//		permissionList.add("public_profile");
 //		permissionList.add("user_friends");
 //		permissionList.add("email");
 //		permissionList.add("user_about_me");
