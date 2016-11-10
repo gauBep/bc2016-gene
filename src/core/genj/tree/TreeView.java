@@ -49,6 +49,7 @@ import genj.util.swing.ViewPortOverview;
 import genj.util.swing.Action2.Group;
 import genj.view.ActionProvider;
 import genj.view.ContextProvider;
+import genj.view.FacebookAction;
 import genj.view.ScreenshotAction;
 import genj.view.SelectionSink;
 import genj.view.SettingsAction;
@@ -494,6 +495,7 @@ public class TreeView extends View implements ContextProvider, ActionProvider {
     // settings
     toolbar.add(new Settings());
     toolbar.add(new ScreenshotAction(content));
+    toolbar.add(new FacebookAction(content));
     toolbar.add(new Print());
     
     // done
