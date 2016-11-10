@@ -23,19 +23,28 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -60,6 +69,7 @@ public class FacebookAction extends Action2 {
 
 	private JComponent component;
 	private static Toolkit toolkit;
+	private static BufferedImage image;
 
 	public FacebookAction(JComponent component) {
 		setImage(IMG2);
@@ -74,7 +84,7 @@ public class FacebookAction extends Action2 {
 		
 		// Create image & copy
 		try {
-			BufferedImage image = new BufferedImage(r.width, r.height, BufferedImage.TYPE_INT_RGB);
+			image = new BufferedImage(r.width, r.height, BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = image.createGraphics();
 			g.setRenderingHint(RenderSelectionHintKey.KEY, false);
 			g.setClip(0, 0, r.width, r.height);
@@ -97,14 +107,12 @@ public class FacebookAction extends Action2 {
 			JLabel loginLabel = new JLabel("Login:    ");
 			loginLabel.setHorizontalAlignment(JLabel.RIGHT);
 			JTextField login = new JTextField();
-			login.setText("genealogyJava@gmail.com");
+			
 			JLabel passwordLabel = new JLabel("Password:    ");
 			passwordLabel.setHorizontalAlignment(JLabel.RIGHT);
 			JPasswordField password = new JPasswordField();
-			password.setText("genJp@ss");
 			
-			JButton sendForAcceptance = new JButton("Send for acceptance");
-			
+			JButton sendForAcceptance = new JButton("Approve posting on my Wall");			
 			JButton postToFacebook = new JButton("Post to Facebook");
 			
 			final JPanel layout = new JPanel(new GridLayout(3, 2));
@@ -116,29 +124,50 @@ public class FacebookAction extends Action2 {
 			layout.add(sendForAcceptance);
 			layout.add(postToFacebook);
 			
-			final Dialog dialog = DialogHelper.getClosableDialog("Post family tree to Facebook", DialogHelper.QUESTION_MESSAGE, layout,
-					Action2.okCancel(), e);
+//			final Dialog dialog = DialogHelper.getClosableDialog("Post family tree to Facebook", 
+//									DialogHelper.QUESTION_MESSAGE, layout,	Action2.okCancel(), e);	
+						
+			final JFrame postFrame = createFrame("Post family tree to Facebook", 300, 100);
+			postFrame.add(layout);
 			
 			sendForAcceptance.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					sendForAcceptanceButtonPressed(dialog);
+					sendForAcceptanceButtonPressed(postFrame);
 				}
 			});
 			
 			postToFacebook.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					postToFacebookButtonPressed(login.getText(), password.getPassword(), dialog);
+					postToFacebookButtonPressed(login.getText(), password.getPassword(), postFrame);
 				}
 			});
 	
-			if (0 != dialog.show())
-				return;
+//			if (0 != dialog.show())
+//				return;
 		//}
 	}
 	
-	private void postToFacebookButtonPressed(String login, char[] password, Dialog dialog) {
+    public JDialog ShowErrorMessage(String message) {
+        JOptionPane pane = new JOptionPane(message, JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = pane.createDialog("ERROR");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+        return dialog;
+    }
+
+    public JDialog ShowInfoMessage(String message) {
+        JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = pane.createDialog("Info");
+        dialog.setIconImage(IMG2.getImage());
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);        
+        return dialog;
+    }
+
+	private void postToFacebookButtonPressed(String login, char[] password, JFrame frame) {
+		JFrame info = createFrame("Connecting to your Facebook account...", 400, 80);
 		boolean logged = false;
-		dialog.close(0);
+		frame.hide();
 		FacebookTokenizer facebookTokenizer = new FacebookTokenizer();
 		try {
 			facebookTokenizer.login(login, String.valueOf(password));	
@@ -146,48 +175,92 @@ public class FacebookAction extends Action2 {
 		} catch (Exception e) {
 			String msg = "ERROR while login to Facebook!";
 			Logger.getLogger("genj.view").log(Level.WARNING, msg, e);
-			DialogHelper.openDialog(getTip(), DialogHelper.ERROR_MESSAGE, msg, Action2.okOnly(), e);			
-		}
-		
-		if (logged)
-		try {
-			// System.out.println(facebookTokenizer.writeInWall("me/feed", "TEST MESSAGE7"));
-			FacebookClient fbClient = new DefaultFacebookClient(facebookTokenizer.getAccessToken());
-			User me = fbClient.fetchObject("me", User.class);
-			System.out.println(me.getName());
-//			fbClient.publish("me/feed", FacebookType.class, 
-//					Parameter.with("link", "http://genj.sourceforge.net"));
-			InputStream data = (InputStream) toolkit.getSystemClipboard().getData(DataFlavor.imageFlavor);
-			FacebookType publishPhotoResponse = fbClient.publish("me/photos", FacebookType.class,
-					  BinaryAttachment.with("FamilyTree.png", data),
-					  // getClass().getResourceAsStream("/cat.png")
-					  Parameter.with("message", "Test cat"));
-			System.out.println("Published photo ID: " + publishPhotoResponse.getId());
-		} catch (Exception e) {
-			String msg = "ERROR while posting to Facebook!";
-			Logger.getLogger("genj.view").log(Level.WARNING, msg, e);
-			DialogHelper.openDialog(getTip(), DialogHelper.ERROR_MESSAGE, msg, Action2.okOnly(), e);				
-		}
+			ShowErrorMessage(msg);
+		}		
+		if (logged) {	
+			info.hide();
+	        JFrame content = createFrame("Please select post options", 250, 100);	        
+	        JPanel layout = new JPanel(new GridLayout(3, 1));	        
+	        
+	        JCheckBox checkbox = new JCheckBox("Post link to GenJ program");
+	        JPanel panel = new JPanel();
+	        layout.add(checkbox);
+	        JEditorPane edit = new JEditorPane();
+	        JButton ok = new JButton("OK");
+	        edit.setText("Please enter the post comment");
+	        edit.setSize(new Dimension (content.getWidth(), content.getHeight() - 30));
+	        
+	        layout.add(edit);
+	        layout.add(ok);
+	        content.add(layout);	
+	        
+			ok.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					content.hide();
+					postToFacebook(facebookTokenizer.getAccessToken(), checkbox.isSelected(), edit.getText());
+				}
+			});
+		}			
+			
 	}	
 	
-	private void sendForAcceptanceButtonPressed(Dialog dialog) {
-		dialog.close(0);
-		final Browser browser = new Browser();
-		com.teamdev.jxbrowser.chromium.swing.BrowserView view = new com.teamdev.jxbrowser.chromium.swing.BrowserView(browser);
-	    
-		JFrame frame = new JFrame("http://www.facebook.com");
-		frame.requestFocus();
-
-		frame.setSize(600, 600);
-		frame.setVisible(true);	
+	JFrame createFrame(String title, int x, int y) {
+		JFrame frame = new JFrame(title);
+		frame.setSize(x, y);
+		frame.setLocationRelativeTo(null);
+		frame.show();
 		frame.setAlwaysOnTop(true);
-		frame.requestFocus();
-		frame.add(view);
+		frame.setIconImage(IMG2.getImage());	
+		return frame;
+	}
+	
+	void postToFacebook(String token, boolean postLink, String comment){
+		JFrame info = new JFrame();
+		try {			
+			info = createFrame("Please wait while connecting to Facebook...", 400, 80);
+			FacebookClient fbClient = new DefaultFacebookClient(token);
+			User me = fbClient.fetchObject("me", User.class);
 
+			ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+			ImageIO.write(image, "png", byteStream);
+			InputStream inputStream = new ByteArrayInputStream(byteStream.toByteArray());
+
+			info.setTitle("Please wait while posting to Facebook...");
+			if (postLink)
+				fbClient.publish("me/feed", FacebookType.class, 
+						Parameter.with("link", "http://genj.sourceforge.net"));
+
+			FacebookType publishPhotoResponse = fbClient.publish("me/photos", FacebookType.class,
+					BinaryAttachment.with("FamilyTree.png", inputStream), 
+					Parameter.with("message", comment));
+			// publishPhotoResponse.getId());
+			info.hide();
+			ShowInfoMessage("You message was sucessfully posted to Facebook!");
+		} catch (Exception e) {
+			info.hide();
+			String msg = "ERROR while posting to Facebook!";
+			Logger.getLogger("genj.view").log(Level.WARNING, msg, e);
+			// DialogHelper.openDialog(getTip(), DialogHelper.ERROR_MESSAGE,
+			// msg, Action2.okOnly(), e);			
+			ShowErrorMessage(msg);
+		}
+	}
+	
+	private void sendForAcceptanceButtonPressed(JFrame frame) {
+		//frame.hide();
+		final Browser browser = new Browser();		
+	    
+		JFrame browserFrame = createFrame("Please wait while loading browser...", 600, 600);
+		browserFrame.requestFocus();
+				
+		com.teamdev.jxbrowser.chromium.swing.BrowserView view = new com.teamdev.jxbrowser.chromium.swing.BrowserView(browser);
+		browserFrame.add(view);
 		browser.loadURL("https://www.facebook.com/dialog/permissions.request?_path=permissions.request" +
 						"&app_id=1345837392094044&redirect_uri=https://www.facebook.com/connect/login_success.html" + 
 						"&response_type=token&perms=public_profile,publish_actions");
 		
+		browserFrame.setTitle("www.facebook.com: Approve GenJ Application to post on my Wall");
+		//frame.show();
 	}
 
 	/**

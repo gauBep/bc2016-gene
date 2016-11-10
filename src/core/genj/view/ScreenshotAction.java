@@ -91,31 +91,31 @@ public class ScreenshotAction extends Action2 {
      if (0!=dialog.show())
          return;
      
-     viewport.addActionListener(new ActionListener() {
- 		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked viewport");
-			dialog.close(0);
-		}
-	});
-     
-     viewport.addActionListener(new ActionListener() {
-  		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked viewport 2 bla bla");
+//     viewport.addActionListener(new ActionListener() {
+// 		
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			System.out.println("clicked viewport");
 //			dialog.close(0);
-		}
-	});
+//		}
+//	});
      
-     all.addActionListener(new ActionListener() {
-  		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("clicked all");
-		}
-	});
+//     viewport.addActionListener(new ActionListener() {
+//  		
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			System.out.println("clicked viewport 2 bla bla");
+////			dialog.close(0);
+//		}
+//	});
+     
+//     all.addActionListener(new ActionListener() {
+//  		
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			System.out.println("clicked all");
+//		}
+//	});
      
 //     viewport.addChangeListener(new ChangeListener() {
 //		
