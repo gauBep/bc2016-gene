@@ -19,12 +19,6 @@
  */
 package genj.view;
 
-import genj.renderer.RenderSelectionHintKey;
-import genj.util.Resources;
-import genj.util.swing.Action2;
-import genj.util.swing.DialogHelper;
-import genj.util.swing.ImageIcon;
-
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -34,6 +28,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +38,15 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JRadioButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import genj.renderer.RenderSelectionHintKey;
+import genj.util.Resources;
+import genj.util.swing.Action2;
+import genj.util.swing.DialogHelper;
+import genj.util.swing.DialogHelper.Dialog;
+import genj.util.swing.ImageIcon;
 
 /**
  * An action for copying to an image
@@ -68,17 +72,78 @@ public class ScreenshotAction extends Action2 {
     
     if (r.width>rVisible.width || r.height>rVisible.height) {
     
-      JRadioButton viewport = new JRadioButton(RES.getString("screenshot.asviewed"), true);
+    	//TODO: change back to true
+      JRadioButton viewport = new JRadioButton(RES.getString("screenshot.asviewed"), false);
       JRadioButton all = new JRadioButton(RES.getString("screenshot.all", false));
+      
       ButtonGroup group = new ButtonGroup();
       group.add(viewport);
       group.add(all);
+      
+
+      
       Box choices = new Box(BoxLayout.Y_AXIS);
       choices.add(viewport);
       choices.add(all);
       
-      if (0!=DialogHelper.openDialog(getTip(), DialogHelper.QUESTION_MESSAGE, choices, Action2.okCancel(), e))
-        return;
+     final Dialog dialog = DialogHelper.getClosableDialog(getTip(), DialogHelper.QUESTION_MESSAGE, choices, Action2.okCancel(), e);
+     
+     if (0!=dialog.show())
+         return;
+     
+     viewport.addActionListener(new ActionListener() {
+ 		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("clicked viewport");
+			dialog.close(0);
+		}
+	});
+     
+     viewport.addActionListener(new ActionListener() {
+  		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("clicked viewport 2 bla bla");
+//			dialog.close(0);
+		}
+	});
+     
+     all.addActionListener(new ActionListener() {
+  		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("clicked all");
+		}
+	});
+     
+//     viewport.addChangeListener(new ChangeListener() {
+//		
+//		@Override
+//		public void stateChanged(ChangeEvent e) {
+//			System.out.println("changed");
+//		}
+//	});
+     
+      
+/*      new Thread(new Runnable() {
+		
+		@Override
+		public void run() {
+			for(int i = 0; i< 5; i++){
+				System.out.println("wait until closing: " + i);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			dialog.close(0);
+		}
+	}).start();*/
+      
+
 
       if (viewport.isSelected())
         r = rVisible;

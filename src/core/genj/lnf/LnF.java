@@ -38,6 +38,8 @@ import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import joxy.*;
 
 /**
  * A Look&Feel
@@ -50,6 +52,8 @@ public class LnF {
   static private final String 
     LNF_PROPERTIES = "lnf.properties",
     LNF_DIR        = "./lnf";
+
+private static final boolean USE_JOXY = true;
 
   /** Look&Feels */
   private static LnF[] instances;
@@ -118,7 +122,10 @@ public class LnF {
 
     // add an option for using the java default (aka don't change LnF from what's setup by VM)
     result.add(new LnF("Java Default", UIManager.getLookAndFeel().getClass().getName(), "", "", null, null));
+    result.add(new LnF("joxy.JoxyLookAndFeel", UIManager.getLookAndFeel().getClass().getName(), "", "", null, null));
 
+//     JoxyArrowButton arrowButton = new JoxyArrowButton(0);
+    
     // remember
     instances = (LnF[])result.toArray(new LnF[result.size()]);   
     
@@ -159,35 +166,38 @@ public class LnF {
   /**
    * Type
    */
-  private LookAndFeel getInstance() throws Exception {
-    
-    // create an instance once
-    if (instance==null) 
-      instance = (LookAndFeel)cl.loadClass(type).newInstance();      
-    
-    // Reset Metal's current theme (some L&Fs change it)
-    if (instance.getClass()==javax.swing.plaf.metal.MetalLookAndFeel.class) {
-      javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(
-        new javax.swing.plaf.metal.DefaultMetalTheme()
-      );
-    }
+	private LookAndFeel getInstance() throws Exception {
+		
+		if (USE_JOXY) {
+			if (instance == null) {
+				instance = new JoxyLookAndFeel();
+			}
+			return instance;
+		}
+		// create an instance once
+		if (instance == null)
+			instance = (LookAndFeel) cl.loadClass(type).newInstance();
 
-    // prepare theme
-    if (theme!=null) {
-      
-      // calc theme jar       
-      String themejar =  new File(getLnFDir(), getTheme()).getAbsolutePath();
-      
-      // HACK: for www.lfprod.com's SkinLookAndFeel ONLY right now
-      System.setProperty("skinlf.themepack", themejar);
-    
-      // Done
-    }
-    
-    // here it is
-    return instance;
-  }
-  
+		// Reset Metal's current theme (some L&Fs change it)
+		if (instance.getClass() == javax.swing.plaf.metal.MetalLookAndFeel.class) {
+			javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(new javax.swing.plaf.metal.DefaultMetalTheme());
+		}
+		// prepare theme
+		if (theme != null) {
+
+			// calc theme jar
+			String themejar = new File(getLnFDir(), getTheme()).getAbsolutePath();
+
+			// HACK: for www.lfprod.com's SkinLookAndFeel ONLY right now
+			System.setProperty("skinlf.themepack", themejar);
+
+			// Done
+		}
+
+		// here it is
+		return instance;
+	}
+
   /**
    * Classloader
    */

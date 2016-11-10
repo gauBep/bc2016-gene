@@ -17,6 +17,7 @@
 	<classpathentry kind="lib" path="language/fr"/>
 	<classpathentry kind="lib" path="language/hu"/>
 	<classpathentry kind="lib" path="language/nl"/>
+	<classpathentry kind="lib" path="language/lv"/>
 	<classpathentry kind="lib" path="language/pl"/>
 	<classpathentry kind="lib" path="language/pt_BR"/>
 	<classpathentry kind="lib" path="language/ru"/>
@@ -37,20 +38,12 @@
 	<classpathentry kind="lib" path="contrib/fop/batik-xml.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/swingx-0.7.jar" sourcepath="C:/Documents and Settings/Netbook/My Documents/Workspace/swingx/trunk/swingx/src/main/java"/>
-	<classpathentry exported="true" kind="lib" path="lib/spin-1.5.jar"/>
+	<classpathentry kind="lib" path="lib/spin-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/AppleJavaExtensions.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="language/cs"/>
 	<classpathentry kind="lib" path="language/fi"/>
 	<classpathentry kind="lib" path="language/it"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/js.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/js-engine.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-6.7.1.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-linux32-6.7.1.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-linux64-6.7.1.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-mac-6.7.1.jar"/>
-	<classpathentry kind="lib" path="/home/student/workspace/Sandbox/lib/jxbrowser-win-6.7.1.jar"/>
-	<classpathentry kind="lib" path="/home/student/Downloads/license.jar"/>
 	<classpathentry kind="lib" path="lib/js-engine.jar"/>
 	<classpathentry kind="lib" path="lib/js.jar"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
@@ -60,5 +53,6 @@
 	<classpathentry kind="lib" path="lib/jxbrowser-mac-6.7.1.jar"/>
 	<classpathentry kind="lib" path="lib/jxbrowser-win-6.7.1.jar"/>
 	<classpathentry kind="lib" path="lib/license.jar"/>
+	<classpathentry kind="lib" path="lib/joxy.jar"/>
 	<classpathentry kind="output" path="build/eclipse/lostnfound"/>
 </classpath>

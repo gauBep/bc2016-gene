@@ -42,7 +42,11 @@ final public class Images {
     imgAdd,
 	
     imgDel,
-    imgNew;
+    imgNew,
+  
+  	imgShare;
+  
+  
 
   /**
    * Constructor which pre-loads all images
@@ -62,5 +66,7 @@ final public class Images {
     
     imgNew       = new ImageIcon(this,"images/New");
     imgDel       = new ImageIcon(this,"images/Delete");
+    
+    imgShare       = new ImageIcon(this,"images/Share");
   }
 }

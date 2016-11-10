@@ -176,6 +176,11 @@ public class DialogHelper {
 
   public static int openDialog(String title, int messageType,  JComponent content, Action[] actions, Object source) {
     return new Dialog(title, messageType, content, actions, source).show();
+  }  
+  
+  public static Dialog getClosableDialog(String title, int messageType,  JComponent content, Action[] actions, Object source) {
+	  Dialog dialog = new Dialog(title, messageType, content, actions, source);
+	  return dialog;
   }
 
   public static Window getWindow(EventObject event) {

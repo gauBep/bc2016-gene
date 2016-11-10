@@ -39,6 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -89,6 +90,8 @@ public class BrowserView extends View {
   /** current type we're showing */
   private Mode currentMode;
   
+  private Browser browser;
+  
   /**
    * Constructor
    */
@@ -106,61 +109,38 @@ public class BrowserView extends View {
     setLayout(new BorderLayout());
 //    add(propertyTable, BorderLayout.CENTER);
     
-    JButton button = new JButton("OK computer");
-    this.add(button);
-    
-    //FIXME
-    
-    
-//    String content = null;
-//	try {
-//		content = readFile("sample.html");
-//	} catch (IOException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	System.out.println(content);
-	
-//	if (true){
-//		return;
-//	}
-    
-    //FIXME
-	final Browser browser = new Browser();
-	com.teamdev.jxbrowser.chromium.swing.BrowserView view = new com.teamdev.jxbrowser.chromium.swing.BrowserView(browser);
+    new Thread(new Runnable(){
 
-	final JTextField addressBar = new JTextField(
-            "http://www.google.com");
-    addressBar.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            browser.loadURL(addressBar.getText());
-        }
-    });
+		@Override
+		public void run() {
+			browser = new Browser();
+			com.teamdev.jxbrowser.chromium.swing.BrowserView view = new com.teamdev.jxbrowser.chromium.swing.BrowserView(browser);
+			
+			SwingUtilities.invokeLater(new Runnable(){
 
-    JPanel addressPane = new JPanel(new BorderLayout());
-    addressPane.add(new JLabel(" URL: "), BorderLayout.WEST);
-    addressPane.add(addressBar, BorderLayout.CENTER);
-    
-    
-	
-	
-	
-//	JFrame frame = new JFrame("JxBrowser - Hello World");
-//	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	this.add(view);
-	this.add(addressPane, BorderLayout.NORTH);
-//	frame.setSize(500, 400);
-//	frame.setLocationRelativeTo(null);
-//	frame.setVisible(true);
+				@Override
+				public void run() {
+					final JTextField addressBar = new JTextField(
+				            "http://www.google.com");
+				    addressBar.addActionListener(new ActionListener() {
+				        @Override
+				        public void actionPerformed(ActionEvent e) {
+				            browser.loadURL(addressBar.getText());
+				        }
+				    });
 
-//	browser.loadHTML("<html><body><h1>Hello World!</h1></body></html>");
-//	browser.loadHTML(content);
-    
-	browser.loadURL(addressBar.getText());
-    
-    
-    
+				    JPanel addressPane = new JPanel(new BorderLayout());
+				    addressPane.add(new JLabel(" URL: "), BorderLayout.WEST);
+				    addressPane.add(addressBar, BorderLayout.CENTER);	
+					
+				    BrowserView.this.add(view);
+				    BrowserView.this.add(addressPane, BorderLayout.NORTH);
+				    
+					browser.loadURL(addressBar.getText());
+					
+				}});
+			
+		}}).start();     
     
     // get current mode
     currentMode = getMode(Gedcom.INDI);
