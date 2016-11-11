@@ -56,7 +56,6 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
 import com.restfb.types.User;
-import com.sun.xml.internal.ws.api.Component;
 import com.teamdev.jxbrowser.chromium.Browser;
 
 /**
@@ -112,7 +111,7 @@ public class FacebookAction extends Action2 {
 			passwordLabel.setHorizontalAlignment(JLabel.RIGHT);
 			JPasswordField password = new JPasswordField();
 			
-			JLabel approvalDisclaimer = new JLabel("<html>Please approve GenJ application for posting on the wall</html>");
+			JLabel approvalDisclaimer = new JLabel("<html>Please Approve GenJ for posting on the wall</html>");
 			JLabel passwordDisclaimer = new JLabel("<html>ATTENTION: Your password and login won't be stored!</html>");
 			
 			JButton sendForAcceptance = new JButton("Approve application");			
@@ -132,7 +131,7 @@ public class FacebookAction extends Action2 {
 //			final Dialog dialog = DialogHelper.getClosableDialog("Post family tree to Facebook", 
 //									DialogHelper.QUESTION_MESSAGE, layout,	Action2.okCancel(), e);	
 						
-			final JFrame postFrame = createFrame("Post family tree to Facebook", 350, 140);
+			final JFrame postFrame = createFrame("Post family tree to Facebook", 430, 180);
 			postFrame.add(layout);
 			postFrame.setResizable(false);
 			
