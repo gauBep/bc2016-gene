@@ -55,7 +55,7 @@ public class LnF {
     LNF_PROPERTIES = "lnf.properties",
     LNF_DIR        = "./lnf";
 
-private static final boolean USE_JOXY = false;
+private static final boolean USE_JOXY = true;
 
 
 
